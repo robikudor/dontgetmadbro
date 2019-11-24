@@ -5,16 +5,11 @@ class Puppet
     @id = id
     @steps_left = 44
     @status = :idle
-    @finished_position = nil
     @team = team
   end
 
-  def move(steps)
-    if @steps_left >= steps
-      @steps_left -= steps
-      puppet_finished?
-    end
-    finished?
+  def move(new_step)
+    @steps_left = new_step
   end
 
   def reset_puppet
@@ -22,7 +17,7 @@ class Puppet
     @status = :idle
   end
 
-  def start_move
+  def start_moving
     @status = :moving
   end
 
@@ -38,15 +33,12 @@ class Puppet
     @status == :finished
   end
 
-  def puppet_finished?
-    if (1..4) === @steps_left
-      @status = :finished
-      @finished_position = @steps_left
-    end
+  def finish
+    @status = :finished
   end
 
   def inspect
-    "[#{@team},#{@id}]"
+    "(#{@team}-#{@id})"
   end
 
   attr_reader :id, :finished_position, :steps_left, :team, :status

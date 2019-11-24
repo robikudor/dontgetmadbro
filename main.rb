@@ -1,10 +1,8 @@
-require './game.rb'
+require './game_board.rb'
 require './player.rb'
 require './puppet.rb'
-require './board.rb'
-require 'pp'
 require 'terminal-table'
 
-g = Game.new
-  g.play
+g = GameBoard.new
+g.start_game
 
